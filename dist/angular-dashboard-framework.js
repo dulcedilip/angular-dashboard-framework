@@ -476,6 +476,10 @@ angular.module('adf')
           }
         };
 
+        $scope.collapseAll = function(collapseExpandStatus){
+            $rootScope.$broadcast('adfDashboardCollapseExapand',{collapseExpandStatus : collapseExpandStatus});
+        };
+
         $scope.cancelEditMode = function(){
           $scope.editMode = false;
           $scope.modelCopy = angular.copy($scope.modelCopy, $scope.adfModel);
@@ -1160,6 +1164,11 @@ angular.module('adf')
       },
 
       controller: ["$scope", function ($scope) {
+        
+        $scope.$on("adfDashboardCollapseExapand",function(event,args){
+           $scope.widgetState.isCollapsed = args.collapseExpandStatus;
+         });
+
         $scope.openFullScreen = function() {
           var definition = $scope.definition;
           var fullScreenScope = $scope.$new();

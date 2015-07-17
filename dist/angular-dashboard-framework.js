@@ -491,6 +491,7 @@ angular.module('adf')
             title: model.title
           };
           editDashboardScope.structures = dashboard.structures;
+
           var instance = $modal.open({
             scope: editDashboardScope,
             templateUrl: adfTemplatePath + 'dashboard-edit.html',
@@ -525,11 +526,19 @@ angular.module('adf')
             widgets = dashboard.widgets;
           }
           addScope.widgets = widgets;
+
+          var adfAddTemplatePath = adfTemplatePath + 'widget-add.html';
+          if(model.addTemplateUrl)
+          {
+            adfAddTemplatePath = model.addTemplateUrl;
+          }
+
           var opts = {
             scope: addScope,
-            templateUrl: adfTemplatePath + 'widget-add.html',
+            templateUrl: adfAddTemplatePath,
             backdrop: 'static'
           };
+
           var instance = $modal.open(opts);
           addScope.addWidget = function(widget){
             var w = {
@@ -1108,10 +1117,15 @@ angular.module('adf')
         // bind edit function
         $scope.edit = function() {
           var editScope = $scope.$new();
+          
+          var adfEditTemplatePath = adfTemplatePath + 'widget-edit.html';
+          if (definition.editTemplateUrl) {
+            adfEditTemplatePath = definition.editTemplateUrl;
+          }
 
           var opts = {
             scope: editScope,
-            templateUrl: adfTemplatePath + 'widget-edit.html',
+            templateUrl: adfEditTemplatePath,
             backdrop: 'static'
           };
 

@@ -119,7 +119,6 @@ angular.module('adf')
         // bind edit function
         $scope.edit = function() {
           var editScope = $scope.$new();
-
           editScope.definition = angular.copy(definition);
           
           var adfEditTemplatePath = adfTemplatePath + 'widget-edit.html';
